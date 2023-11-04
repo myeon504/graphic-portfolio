@@ -1,0 +1,384 @@
+<html>
+    <head>
+    <title>Portfolio for oimu</title>
+    <link href="https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/variable/woff2/SUIT-Variable.css" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="57x57" href="apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+<style>
+
+body{
+    margin: 0;
+}
+
+.loading{
+z-index: 0;
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+width: 100px;
+height: 100px;}
+
+.loading img{
+    width: 100%;
+    height: 100%;
+}
+
+.background-video{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+}
+
+.background-video video{
+    width:100%;
+    height:100%;
+    object-fit: cover;
+}
+
+.after-loading{
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.page-center{
+    z-index: 2;
+    display: flex;
+    overflow-x: hidden;
+    margin: auto;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    width: 70%;
+    min-height: 610px;
+    max-height: 1200px;
+    min-width: 1200px;
+    max-width: 1500px;
+}
+
+
+.work-container{
+    z-index: 3;
+    height: auto;
+    overflow: hidden;
+    display: flex;
+    background: #070023;
+}
+
+.workimg{
+    height: calc(100vh - 100px);
+    position: relative;
+    margin-right: 50px;
+    min-height: 720px;
+}
+
+.worktext{
+    overflow: hidden;
+    margin-top: 50px;
+    width: 27vw;
+    margin-right: 50px;
+}
+
+.workimg video{
+    width: auto;
+    height: 100%;
+}
+
+.workimg img{
+    width: auto;
+    height: 100%;
+}
+
+.button-container{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    backdrop-filter: blur(5px);
+}
+
+.button{
+    width: 15%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+}
+
+h3{
+font-family: 'SUIT Variable', sans-serif;
+font-weight: 700;
+margin-top: 0;
+color: #dbdcdc;
+}
+
+h2{
+    font-family: 'SUIT Variable', sans-serif;
+    font-weight: 700;
+    font-size: 1.6em;
+    line-height: 1.6em;
+    margin-bottom: 40px;
+    word-break : keep-all;
+    color: #dbdcdc;
+}
+
+.aboutposter{
+    font-family: 'SUIT Variable', sans-serif;
+    color: #dbdcdc;
+    font-weight: 400;
+    font-size: 1.2em;
+    line-height: 1.8em;
+    word-break : keep-all;
+    margin-bottom: 40px;
+}
+
+.left-container{
+    position: relative;
+    margin-right: 40px;
+}
+
+.right-container{
+    position: relative;
+    margin-left: 40px;
+}
+
+.prev{
+    transform: translate(-100%, -50%);
+    z-index: 20;
+    position: fixed;
+    top : 50%
+}
+
+.prev img{
+    height: 36px;
+    width: auto;
+}
+
+.next{
+    transform: translate(0, -50%);
+    width: auto;
+    z-index: 20;
+    position: fixed;
+    top : 50%
+}
+
+.next img{
+    height: 36px;
+    width: auto;
+}
+
+.back{
+    z-index: 20;
+    top: 55px;
+    position: fixed;
+}
+
+.back img{
+    width: 36px;
+    height: auto;
+}
+
+.cursorItem1 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.cursorItem2 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.cursorItem3 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.cursorItem1 .circle1 {
+  position: fixed;
+  display: block;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  background-color: white;
+  border-radius: 50%;
+  transition: all 0.2s ease-in-out;
+  opacity: 0.9;
+}
+
+.cursorItem2 .circle2 {
+  position: fixed;
+  display: block;
+  width: 15px;
+  height: 15px;
+  margin: -7.5px 0 0 -7.5px;
+  background-color: white;
+  border-radius: 50%;
+  transition: all 0.2s ease-in-out;
+  opacity: 0.6;
+}
+
+.cursorItem3 .circle3 {
+  position: fixed;
+  display: block;
+  width: 10px;
+  height: 10px;
+  margin: -5px 0 0 -5px;
+  background-color: white;
+  border-radius: 50%;
+  transition: all 0.2s ease-in-out;
+  opacity: 0.3;
+}
+
+</style>
+</head>
+<body>
+    <div class="background-video">
+        <video autoplay muted loop>
+            <source src="main_blur.mp4">
+        </video>
+    </div>
+
+    <div class="loading" id="loadinggif">
+        <img src="loading.gif">
+    </div>
+
+    <div class="after-loading" id="afterLoading">
+    <div class="page-center">
+        <div class="left-container">
+            <div class="prev">
+            <a href="hbaf.html">
+            <img src="prev.svg">
+            </a>
+            </div>
+        </div>
+    <div class="work-container">
+        <div class="workimg" id="img1">
+            <img src="memphis_poster.png">
+        </div>
+        <div class="worktext">
+            <h3>
+                POSTER DESIGN
+            </h3>
+            <h2>
+                뮤지컬 멤피스
+            </h2>
+
+            <p class="aboutposter">
+                2023년 국내 초연된 브로드웨이 뮤지컬 멤피스의 포스터입니다.
+                차별과 갈등이 만연하던 1950년대 미국 남부 멤피스에서 흑인 음악을 널리 알린
+                백인 DJ 듀이 필립스의 실화를 바탕으로 만들어진 작품으로 
+                레코드와 라디오의 요소를 활용하고 극의 공간적 배경인 빌 스트리트의 색감을 참고하여 제작하였습니다.
+            </p>
+
+            <p class="aboutposter">
+                사용 소프트웨어 : Illustrator
+                <br>사이즈 : A3
+                <br>*개인 작업
+            </p>
+
+        </div>
+    </div>    
+    <div class="right-container">
+        <div class="back">
+            <a href="index.html#list">
+                <img src="x_red.svg">
+            </a>
+        </div>
+        <div class="next">
+            <a href="littleflamingo.html">
+            <img src="next.svg">
+        </a>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="cursorItem1">
+    <span class="circle1"></span>
+</div>
+
+<div class="cursorItem2">
+    <span class="circle2"></span>
+</div>
+
+<div class="cursorItem3">
+    <span class="circle3"></span>
+</div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+const loadingFinish = document.getElementById("afterLoading");
+const loadingGif = document.getElementById("loadinggif");
+
+window.addEventListener('load', function() {
+    loadingFinish.style.opacity = '1';
+    loadingGif.style.opacity = '0';
+});
+
+let cursorItem1;
+let cursorItem2;
+let cursorItem3;
+let x=0, y = 0;
+let mx=0, my = 0;
+let nx=0, ny = 0;
+let ox=0, oy = 0;
+
+window.onload = function(){
+
+    cursorItem1 = document.querySelector(".cursorItem1");  
+    cursorItem2 = document.querySelector(".cursorItem2");  
+    cursorItem3 = document.querySelector(".cursorItem3");  
+
+    window.addEventListener("mousemove", function(e){
+        x = e.clientX;
+        y = e.clientY;
+        cursorItem1.style.transform = "translate("+ x +"px, "+ y + "px )";
+        cursorItem2.style.transform = "translate("+ x +"px, "+ y + "px )";
+        cursorItem3.style.transform = "translate("+ x +"px, "+ y + "px )";
+    });
+    loop();
+}
+
+function loop(){
+    mx += (x - mx ) * 0.09;
+    my += (y - my ) * 0.09; 
+    nx += (x - nx ) * 0.06;
+    ny += (y - ny ) * 0.06; 
+    ox += (x - ox ) * 0.04;
+    oy += (y - oy ) * 0.04; 
+    cursorItem1.style.transform = "translate("+ mx +"px, "+ my + "px )";
+    cursorItem2.style.transform = "translate("+ nx +"px, "+ ny + "px )";
+    cursorItem3.style.transform = "translate("+ ox +"px, "+ oy + "px )";
+    requestAnimationFrame(loop);
+}
+
+
+</script>
+    </html>

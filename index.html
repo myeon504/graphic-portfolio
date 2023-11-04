@@ -1,0 +1,971 @@
+<html>
+    <head>
+    <title>Portfolio for oimu</title>
+
+    <link href="https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/variable/woff2/SUIT-Variable.css" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="57x57" href="apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+<style>
+html{scroll-behavior: smooth;}
+body{
+    background-color: #ffdcdc;
+    margin: 0;
+    font-family: 'SUIT Variable', sans-serif;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+body::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+}
+
+a{
+    text-decoration-line: none;
+}
+
+.loading{
+z-index: 0;
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+width: 100px;
+height: 100px;}
+
+.loading img{
+    width: 100%;
+    height: 100%;
+}
+
+.after-loading{
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.main-video{
+ background-color: #ffdcdc;
+ width: 100%;
+ height: 100%;
+ position: sticky;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+.main-video video{
+    width:100%;
+    height:100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.main-blur{
+    transition: 1s ease;
+    width:100%;
+    height:100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    transition: all ease 1.5s 0s;
+    z-index: 2;
+}
+
+.main-blur video{
+    transition: 1s ease;
+    width:100%;
+    height:100%;
+    object-fit: cover;
+    z-index: 3;
+}
+
+.main-top{
+    transition: all ease 0.5s 0s;
+    width: 92%;
+    left: 4%;
+    top: 4%;
+    height: auto;
+    display: flex;
+    position: fixed;
+    justify-content: space-between;
+}
+
+.main-top p{
+    margin: 0;
+    color: #837285;
+    font-size: 1.5em;
+    font-weight: 700;
+    line-height: 1.5em;
+    
+}
+
+.CV-button{
+    text-decoration-line: underline;
+    cursor: pointer;
+}
+
+.CV-background{
+    width: 100vw;
+    height: 100vh;
+    background-color: #423c41;
+    display: none;
+    opacity: 0.5;
+    z-index: 51;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.CV-container{
+    transition: 1.2s ease;
+    width: 25vw;
+    min-width: 430px;
+    height: 100vh;
+    background-color: #f1e0e4;
+    position: fixed;
+    top: 0;
+    right: calc(-25vw - 430px);
+    z-index: 52;
+}
+
+.CV-text{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    width: calc(100% - 100px);
+}
+
+.CV-section{
+    margin-bottom: 50px;
+}
+
+.CV-subject{
+    color: #837285;
+    font-size: 1.4em;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 30px;
+}
+
+.CV-date{
+    color: #837285;
+    font-size: 1em;
+    font-weight: 500;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.CV-content{
+    vertical-align: bottom;
+    display: flex;
+    margin-bottom: 25px;
+}
+
+.CV-company{
+    color: #837285;
+    font-size: 1.2em;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-right: 20px;
+}
+
+.CV-role{
+    color: #837285;
+    font-size: 1.2em;
+    font-weight: 500;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.CV-company a{
+    text-decoration: underline;
+    color: #837285;
+}
+
+.scroll-container{
+    transition: all ease 0.5s 0s;
+    position: fixed;
+    transform: translate(-50%, 0%);
+    left: 50%;
+    bottom: 4.5%;
+}
+
+.scroll-container img{
+    width: auto;
+    margin-bottom: 10px;
+}
+
+.mousearrow-container{
+    height: 24px;
+    width: 30px;
+    margin: auto;
+    position: relative;
+}
+
+.mousearrow{
+    animation: mousearrowAnimation 1s infinite ease-in-out;
+    position: absolute;
+    top: 0px;
+    height: 12px;
+}
+
+@keyframes mousearrowAnimation{
+    0%{
+        top: 0px;
+    } 50% {
+        top: 12px;
+    }
+    100%{
+        top: 0px;
+    }
+}
+
+.box-scroll{
+    z-index: 50;
+    width: 100%;
+    height: 85%;
+    left: 0%;
+    top: 7.5%;
+    position: sticky;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    transition: all ease 1s 0s;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+.box-scroll::-webkit-scrollbar {
+    margin-left: 10%;
+    height: 10px;
+  }
+
+  .box-scroll::-webkit-scrollbar-thumb {
+    background-color: #b9aab7;
+    border-radius: 10px;
+  }
+
+  .box-scroll::-webkit-scrollbar-thumb:hover {
+    background-color: #b1a1af;
+}
+
+  .box-scroll::-webkit-scrollbar-track {
+    background-color: #fdf2f2;
+    border-radius: 10px;
+    margin: 4vw;
+    }
+
+.scroll-delay{
+    height: 100vh;
+    position: relative;
+}
+
+.copyrighttext{
+    position: sticky;
+    top: 95.5%;
+    margin-left: 4vw;
+}
+
+.copyrighttext p{
+    margin: 0;
+    color: #837285;
+    font-size: 1.2em;
+}
+
+.box-container{
+    transition: all ease 1s 0s;
+    width: 132vw;
+    height: 95%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.box-vertical{
+    transition: all ease 1s 0s;
+    overflow: hidden;
+    height: 100%;
+    width: 27vw;
+    display: inline-flex;
+}
+.box-horizonal{
+    transition: all ease 1s 0s;
+    overflow: hidden;
+    height: 100%;
+    width: 30vw;
+    display: inline-flex;
+    flex-flow: row wrap;
+    align-content: space-between;
+}
+
+.quater-container{
+    display: flex;
+    width: 100%;
+    height: 49%;
+    justify-content: space-between;
+}
+
+.box-quarter{
+    transition: all ease 1s 0s;
+    overflow: hidden;
+    height: 100%;
+    width: 49%;
+    flex-flow: row wrap;
+    align-content: space-between;
+}
+
+.thumbnail-vertical{
+    transform: translate3d(-100%, 0, 0);
+    opacity: 0;
+    height: 100%;
+    width: 100%;
+    border-radius: 20px;
+    background-color: #ffdcdc;
+    position: relative;
+}
+.thumbnail-horizonal{
+    transform: translate3d(-100%, 0, 0);
+    opacity: 0;
+    height: 49%;
+    width: 100%;
+    border-radius: 20px;
+    background-color: #ffdcdc;
+}
+
+
+.thumbnail-quarter{
+    transform: translate3d(-100%, 0, 0);
+    opacity: 0;
+    height: 100%;
+    width: 100%;
+    border-radius: 20px;
+    background-color: #ffdcdc;
+}
+
+
+.thumbnail-title{
+    color: white;
+    font-size: 1.4em;
+    font-weight: 700;
+    margin: 40px;
+    z-index: 2;
+    position: relative;
+    line-height: 1.5em;
+
+}
+
+.arrow-container{
+    position: absolute;
+    bottom: 0;
+    margin: 40px;
+    height: 50px;
+    width: calc(100% - 80px);
+}
+
+.arrow{
+    transition: all ease 1s 0s;
+    width: 15%;
+    height: 100%;
+    position: absolute;
+    left: 0%;
+}
+
+.arrow-bar{
+    height: 3px;
+    position: absolute;
+    transform: translate(0, -50%);
+    top: 50%;
+    width: 100%;
+    background-color: white;
+}
+
+.arrow-head{
+    width: 30px;
+    height: 100%;
+    top: 0%;
+    right: 0%;
+    position: absolute;
+    transition: all ease 1s 0s;
+}
+
+
+@keyframes fadeInLeft{
+    0% {
+            transform: translate3d(-100%, 0, 0);
+            opacity: 0;
+        }
+        to {
+            transform: translateZ(0);
+            opacity: 1;
+        }
+}
+
+#thumbnailBox:hover .arrow{width: 100%;}
+
+#thumbnailBox img{
+    width:100%;
+    height:100%;
+    object-fit: cover;
+    border-radius: 20px;
+    position: absolute;
+}
+
+.blank{
+width: 3vw;
+}
+
+.cursorItem1 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.cursorItem2 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.cursorItem3 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.cursorItem1 .circle1 {
+  position: fixed;
+  display: block;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  background-color: white;
+  border-radius: 50%;
+  transition: all 0.2s ease-in-out;
+  opacity: 0.9;
+}
+
+.cursorItem2 .circle2 {
+  position: fixed;
+  display: block;
+  width: 15px;
+  height: 15px;
+  margin: -7.5px 0 0 -7.5px;
+  background-color: white;
+  border-radius: 50%;
+  transition: all 0.2s ease-in-out;
+  opacity: 0.6;
+}
+
+.cursorItem3 .circle3 {
+  position: fixed;
+  display: block;
+  width: 10px;
+  height: 10px;
+  margin: -5px 0 0 -5px;
+  background-color: white;
+  border-radius: 50%;
+  transition: all 0.2s ease-in-out;
+  opacity: 0.3;
+}
+
+</style>
+</head>
+<body>
+<div class="loading">
+    <img src="loading.gif">
+</div>
+
+<div class="after-loading" id="afterLoading">
+<div class="main-video">
+<video autoplay muted loop>
+    <source src="main.mp4">
+</video>
+<div class="main-blur" id="backgroundDark">
+<video autoplay muted loop>
+    <source src="main_blur.mp4">
+</video>
+</div>
+</div>
+
+
+<div class="main-top" id="textOpacity">
+<p>GRAPHIC DESIGN 
+<br>PORTFOLIO
+<br>
+<br>FOR OIMU
+</p>
+<p class="CV-button" onclick="CVopen()">
+    CV
+</p>
+</div>
+
+<div class="scroll-container" id="iconOpacity">
+<img src="mouseicon.svg">
+    <div class="mousearrow-container">
+        <div class="mousearrow">
+            <svg>
+            <path d="M 0 0 L 15 12 L 30 0" fill="transparent" stroke="#837285" stroke-width="2.5"></path>
+            </svg>
+        </div>
+    </div>
+</div>
+
+<div class="CV-background" id="CVbackground" onclick="CVclose()">
+</div>
+<div class="CV-container" id="CVcontainer">
+<div class="CV-text">
+    <div class="CV-section">
+        <p class="CV-subject">
+            WORK EXPERIENCE
+        </p>
+        <p class="CV-date">
+            2023. 4  -  2023. 7
+        </p>
+        <div class="CV-content">
+        <p class="CV-company">
+        <a href="https://www.instagram.com/pink_ven.official/" target='_blank'>STUDIO ORIGIN</a>
+        </p>    
+        <p class="CV-role">
+            캐릭터 3D 디자인
+        </p>
+        </div>
+        <p class="CV-date">
+            2023. 2  -  2023. 4
+        </p>
+        <div class="CV-content">
+            <p class="CV-company">
+                IPX
+            </p>
+            <p class="CV-role">
+                마케팅 그래픽 디자인
+            </p>
+        </div>
+        <p class="CV-date">
+            2021. 7  -  2021. 12
+        </p>
+        <div class="CV-content">
+        <p class="CV-company">
+            SNOW
+        </p>
+        <p class="CV-role">
+            이펙트 스튜디오 모션그래픽
+        </p>
+        </div>
+        <p class="CV-date">
+        2020. 5  -  2020. 11
+        </p>
+        <div class="CV-content">
+        <p class="CV-company">
+        <a href="https://www.ncnc.app/" target='_blank'>DOUBLE NC</a>
+        </p>
+        <p class="CV-role">
+            UX/UI 디자인
+        </p>
+        </div>
+        <p class="CV-date">
+            2020. 1  -  2020. 4
+        </p>
+        <div class="CV-content">
+        <p class="CV-company">
+            DOMO
+        </p> 
+        <p class="CV-role">
+            그래픽 디자인
+        </p>
+        </div>
+    </div>
+    <div class="CV-section">
+        <p class="CV-subject">
+            ACTIVITIES
+        </p>
+        <p class="CV-date">
+            2019. 3  -  2019. 10
+        </p>
+        <div class="CV-content">
+        <p class="CV-company">
+            서울시 
+            <a href="https://seoulismuseum.kr/seoul/index.do?content=%2fseoul%2farchive.do%3fvol%3d26%26rid%3d165" target='_blank'>대학협력 공공미술 프로젝트</a>
+            참여
+        </p>
+        </div>
+        <p class="CV-date">
+            2018. 10
+        </p>
+        <div class="CV-content">
+            <p class="CV-company">교내 포스터 디자인 워크샵
+                <a href=" https://www.behance.net/gallery/71040275/THE-ZOO-Poster-exhibition" target='_blank'>동물원</a> 참여
+            </p>
+        </div>
+        <p class="CV-date">
+            2018. 4  -  2021. 12
+        </p>
+        <div class="CV-content">
+        <p class="CV-company"> 
+            교내 영상 디자인 전공학회 플리커스 활동
+        </p>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="body-scroll">
+    <div class="scroll-delay">
+    </div>
+    <div class="box-scroll" id="list">
+
+        <div class="box-container" id="scrollX">
+
+            <div class="blank"></div>
+        
+            <div class="box-horizonal">
+                <div class="thumbnail-horizonal" id="thumbnailBox">
+                    <a href="bt21.html">
+                    <img src="bt21_thumbnail.png">
+                    <p class="thumbnail-title">
+                        BT21 마케팅 디자인
+                    </p>
+                    <div class="arrow-container">
+                        <div class="arrow">
+                            <div class="arrow-bar">
+                            </div>
+                            <div class="arrow-head">
+                            <svg>
+                                <path d="M 0 0 L 30 25 L 0 50" fill="transparent" stroke="white" stroke-width="3"></path>
+                            </svg>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                </div>
+                <div class="thumbnail-horizonal" id="thumbnailBox">
+                    <a href="secret-adventure.html">
+                    <img src="secretadventure_thumbnail.png">
+                    <p class="thumbnail-title">
+                        선이의 비밀모험
+                    </p>
+                    <div class="arrow-container">
+                        <div class="arrow">
+                            <div class="arrow-bar">
+                            </div>
+                            <div class="arrow-head">
+                            <svg>
+                                <path d="M 0 0 L 30 25 L 0 50" fill="transparent" stroke="white" stroke-width="3"></path>
+                            </svg>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                </div>
+            </div>
+            <div class="box-horizonal">
+                <div class="thumbnail-horizonal" id="thumbnailBox">
+                    <a href="blackbunny.html">
+                    <img src="blackbunny_thumbnail.png">
+                    <p class="thumbnail-title">
+                        2023 검은토끼해 연하장
+                    </p>
+                    <div class="arrow-container">
+                        <div class="arrow">
+                            <div class="arrow-bar">
+                            </div>
+                            <div class="arrow-head">
+                            <svg>
+                                <path d="M 0 0 L 30 25 L 0 50" fill="transparent" stroke="white" stroke-width="3"></path>
+                            </svg>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                </div>
+                <div class="quater-container">
+                <div class="box-quarter">
+                <div class="thumbnail-quarter" id="thumbnailBox">
+                    <a href="semicolon.html">
+                    <img src="semicolon_thumbnail.png">
+                    <div class="arrow-container">
+                        <div class="arrow">
+                            <div class="arrow-bar">
+                            </div>
+                            <div class="arrow-head">
+                            <svg>
+                                <path d="M 0 0 L 30 25 L 0 50" fill="transparent" stroke="white" stroke-width="3"></path>
+                            </svg>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                </div>
+                </div>
+                <div class="box-quarter">
+                <div class="thumbnail-quarter" id="thumbnailBox">
+                    <a href="flowerandseon.html">
+                    <img src="flowerandseon_thumbnail.png">
+                    <div class="arrow-container">
+                        <div class="arrow">
+                            <div class="arrow-bar">
+                            </div>
+                            <div class="arrow-head">
+                            <svg>
+                                <path d="M 0 0 L 30 25 L 0 50" fill="transparent" stroke="white" stroke-width="3"></path>
+                            </svg>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                </div>
+                </div>
+                </div>
+            </div>
+
+            <div class="box-horizonal">
+                <div class="thumbnail-horizonal" id="thumbnailBox">
+                    <a href="cyberbakery.html">
+                    <img src="cyberbakery_thumbnail.png">
+                    <p class="thumbnail-title">
+                        Cyber Bakery
+                    </p>
+                    <div class="arrow-container">
+                        <div class="arrow">
+                            <div class="arrow-bar">
+                            </div>
+                            <div class="arrow-head">
+                            <svg>
+                                <path d="M 0 0 L 30 25 L 0 50" fill="transparent" stroke="white" stroke-width="3"></path>
+                            </svg>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                </div>
+                <div class="thumbnail-horizonal" id="thumbnailBox">
+                    <a href="hbaf.html">
+                    <img src="hbaf_thumbnail.png">
+                    <p class="thumbnail-title">
+                        HBAF 친구들 모여라!
+                    </p>
+                    <div class="arrow-container">
+                        <div class="arrow">
+                            <div class="arrow-bar">
+                            </div>
+                            <div class="arrow-head">
+                            <svg>
+                                <path d="M 0 0 L 30 25 L 0 50" fill="transparent" stroke="white" stroke-width="3"></path>
+                            </svg>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                </div>
+            </div>
+
+            <div class="box-horizonal">
+                <div class="quater-container">
+                <div class="box-quarter">
+                <div class="thumbnail-quarter" id="thumbnailBox">
+                    <a href="memphis.html">
+                    <img src="memphis_thumbnail.png">
+                    <div class="arrow-container">
+                        <div class="arrow">
+                            <div class="arrow-bar">
+                            </div>
+                            <div class="arrow-head">
+                            <svg>
+                                <path d="M 0 0 L 30 25 L 0 50" fill="transparent" stroke="white" stroke-width="3"></path>
+                            </svg>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                </div>
+                </div>
+                <div class="box-quarter">
+                <div class="thumbnail-quarter" id="thumbnailBox">
+                    <a href="littleflamingo.html">
+                    <img src="littleflamingo_thumbnail.png">
+                    <div class="arrow-container">
+                        <div class="arrow">
+                            <div class="arrow-bar">
+                            </div>
+                            <div class="arrow-head">
+                            <svg>
+                                <path d="M 0 0 L 30 25 L 0 50" fill="transparent" stroke="white" stroke-width="3"></path>
+                            </svg>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                </div>
+                </div>
+            </div>
+                <div class="thumbnail-horizonal" id="thumbnailBox">
+                    <a href="litho.html" style="cursor: none;">
+                    <img src="litho_thumbnail.png">
+                    <p class="thumbnail-title">
+                        恍惚境
+                    </p>
+                    <div class="arrow-container">
+                        <div class="arrow">
+                            <div class="arrow-bar">
+                            </div>
+                            <div class="arrow-head">
+                            <svg>
+                                <path d="M 0 0 L 30 25 L 0 50" fill="transparent" stroke="white" stroke-width="3"></path>
+                            </svg>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                </div>
+            </div>
+
+            <div class="blank"></div>
+
+        </div>
+    </div>
+    <div class="copyrighttext">
+        <p>© 2023. Hongmihyeon. All rights reserved.</p>
+    </div>
+    <div class="scroll-delay">
+    </div>
+</div>
+</div>
+
+<div class="cursorItem1">
+    <span class="circle1"></span>
+</div>
+
+<div class="cursorItem2">
+    <span class="circle2"></span>
+</div>
+
+<div class="cursorItem3">
+    <span class="circle3"></span>
+</div>
+
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+history.scrollRestoration = "manual"
+
+const loadingFinish = document.getElementById("afterLoading");
+
+window.addEventListener('load', function() {
+    loadingFinish.style.opacity = '1';
+});
+    
+    document.addEventListener('DOMContentLoaded', function () {
+    const blurvideo = document.getElementById("backgroundDark");
+    const icon = document.getElementById("iconOpacity");
+    const text = document.getElementById("textOpacity");
+    const thumbnailBoxes = document.querySelectorAll('#thumbnailBox');
+    let isAnimationPlayed = false;
+
+    window.addEventListener('scroll', function () {
+        const scrollPosition = window.scrollY;
+        const pageHeight = document.documentElement.scrollHeight - window.innerHeight;
+        
+        if (scrollPosition >= 0.4 * pageHeight && !isAnimationPlayed) {
+            thumbnailBoxes.forEach(function (box) {
+                box.style.animation = 'fadeInLeft 1.2s forwards';
+            });
+
+            isAnimationPlayed = true;
+        }
+
+        if (scrollPosition >= 0.4 * pageHeight){
+            blurvideo.style.opacity = 1;
+        } else if(scrollPosition < 0.4 * pageHeight) {
+            blurvideo.style.opacity = 0;
+        }
+
+        if (scrollPosition >= 0.1 * pageHeight){
+            icon.style.opacity = 0;
+            text.style.opacity = 0;
+        } else if(scrollPosition < 0.1 * pageHeight) {
+            icon.style.opacity = 1;
+            text.style.opacity = 1;
+        }
+
+    });
+});
+
+let cursorItem1;
+let cursorItem2;
+let cursorItem3;
+let x=0, y = 0;
+let mx=0, my = 0;
+let nx=0, ny = 0;
+let ox=0, oy = 0;
+
+window.onload = function(){
+
+    cursorItem1 = document.querySelector(".cursorItem1");  
+    cursorItem2 = document.querySelector(".cursorItem2");  
+    cursorItem3 = document.querySelector(".cursorItem3");  
+
+    window.addEventListener("mousemove", function(e){
+        x = e.clientX;
+        y = e.clientY;
+        cursorItem1.style.transform = "translate("+ x +"px, "+ y + "px )";
+        cursorItem2.style.transform = "translate("+ x +"px, "+ y + "px )";
+        cursorItem3.style.transform = "translate("+ x +"px, "+ y + "px )";
+    });
+    loop();
+}
+
+function loop(){
+    mx += (x - mx ) * 0.09;
+    my += (y - my ) * 0.09; 
+    nx += (x - nx ) * 0.06;
+    ny += (y - ny ) * 0.06; 
+    ox += (x - ox ) * 0.04;
+    oy += (y - oy ) * 0.04; 
+    cursorItem1.style.transform = "translate("+ mx +"px, "+ my + "px )";
+    cursorItem2.style.transform = "translate("+ nx +"px, "+ ny + "px )";
+    cursorItem3.style.transform = "translate("+ ox +"px, "+ oy + "px )";
+    requestAnimationFrame(loop);
+}
+
+const CVbackground = document.getElementById("CVbackground");
+const CVbox = document.getElementById("CVcontainer")
+
+function CVopen(){
+    CVbackground.style.display = "block";
+    CVbox.style.right = 0;
+    document.body.style.overflow = "hidden";
+}
+
+function CVclose(){
+    CVbackground.style.display = "none";
+    CVbox.style.right = ("calc(-25vw - 430px)");
+    document.body.style.overflow = "auto";
+}
+
+</script>
+
+    </html>
