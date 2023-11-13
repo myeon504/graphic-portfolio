@@ -1,1 +1,1 @@
-# portfolio-for-oimu
+# graphic-portfolio
