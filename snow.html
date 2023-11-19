@@ -487,5 +487,32 @@ function loop(){
     cursorItem3.style.transform = "translate("+ ox +"px, "+ oy + "px )";
     requestAnimationFrame(loop);
 }
+
+        var lastMutedVideo = null;
+
+function toggleMute(videoId, buttonId, iconId) {
+    var video = document.getElementById(videoId);
+    var button = document.getElementById(buttonId);
+    var icon = document.getElementById(iconId);
+
+    if (lastMutedVideo && lastMutedVideo !== video) {
+        lastMutedVideo.muted = true;
+        var lastMutedIcon = document.getElementById("soundicon" + lastMutedVideo.id.substring(5));
+        if (lastMutedIcon) {
+            lastMutedIcon.src = "icon_mute.svg";
+        }
+    }
+
+    if (video.muted) {
+        video.muted = false;
+        video.volume = 0.2;
+        icon.src = "icon_sound.svg";
+        lastMutedVideo = video;
+    } else {
+        video.muted = true;
+        icon.src = "icon_mute.svg";
+        lastMutedVideo = null;
+    }
+}
 </script>
     </html>
