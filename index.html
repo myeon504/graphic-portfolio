@@ -91,27 +91,7 @@ height: 100px;}
     height:100%;
     object-fit: cover;
     z-index: 1;
-}
-
-.main-blur{
     transition: 1s ease;
-    width:100%;
-    height:100%;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    transition: all ease 1.5s 0s;
-    z-index: 2;
-}
-
-.main-blur video{
-    transition: 1s ease;
-    width:100%;
-    height:100%;
-    object-fit: cover;
-    z-index: 3;
 }
 
 .main-top{
@@ -517,14 +497,9 @@ width: 3vw;
 
 <div class="after-loading" id="afterLoading">
 <div class="main-video">
-<video autoplay muted loop>
+<video autoplay muted loop id="backgroundBlur">
     <source src="main.mp4">
 </video>
-<div class="main-blur" id="backgroundDark">
-<video autoplay muted loop>
-    <source src="main_blur.mp4">
-</video>
-</div>
 </div>
 
 
@@ -816,7 +791,7 @@ width: 3vw;
                 <div class="quater-container">
                     <div class="box-quarter">
                         <div class="thumbnail-quarter" id="thumbnailBox">
-                            <a href="flowerkeeper.html">
+                            <a href="flowerandseon.html">
                             <img src="flowerandseon_thumbnail.png">
                             <div class="arrow-container">
                                 <div class="arrow">
@@ -911,7 +886,7 @@ window.addEventListener('load', function() {
 });
     
     document.addEventListener('DOMContentLoaded', function () {
-    const blurvideo = document.getElementById("backgroundDark");
+    const blurvideo = document.getElementById("backgroundBlur");
     const icon = document.getElementById("iconOpacity");
     const text = document.getElementById("textOpacity");
     const thumbnailBoxes = document.querySelectorAll('#thumbnailBox');
@@ -930,9 +905,9 @@ window.addEventListener('load', function() {
         }
 
         if (scrollPosition >= 0.4 * pageHeight){
-            blurvideo.style.opacity = 1;
+            blurvideo.style.filter = 'blur(10px)';
         } else if(scrollPosition < 0.4 * pageHeight) {
-            blurvideo.style.opacity = 0;
+            blurvideo.style.filter = 'blur(0px)';
         }
 
         if (scrollPosition >= 0.1 * pageHeight){
@@ -1004,3 +979,4 @@ function CVclose(){
 
 
     </html>
+
